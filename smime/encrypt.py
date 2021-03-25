@@ -54,6 +54,9 @@ def encrypt(message, certs, algorithm="aes256_cbc"):
             headers[hdr_name] = values
 
     content = copied_msg.as_string()
+    # .as_string() returns Unicode string in py3, byte string in py2
+    if isinstance(content, unicode):
+        content = content.encode("utf-8")
     recipient_infos = []
 
     for recipient_info in __iterate_recipient_infos(certs, block_cipher.session_key):

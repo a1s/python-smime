@@ -51,7 +51,7 @@ class AES(BlockCipher):
     def encrypt(self, data):
         padded_data = self._pad(data, self.block_size)
         encrypted_content = (
-            self._encryptor.update(padded_data.encode("utf-8"))
+            self._encryptor.update(padded_data)
             + self._encryptor.finalize()
         )
         return {
